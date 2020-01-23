@@ -1,0 +1,16 @@
+group 'com.maxtropy.spark'
+version '1.0-SNAPSHOT'
+
+apply from: "${rootDir}/gradle/scala.gradle"
+
+repositories {
+    mavenLocal()
+    maven() {
+        url 'http://maven.aliyun.com/nexus/content/groups/public/'
+    }
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
