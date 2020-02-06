@@ -1,24 +1,25 @@
-package example29
-
 import org.apache.spark.{SparkConf, SparkContext}
 
 /**
-  * TODO
+  * 并行化集合创建RDD
   *
   * @author gaochen
   * @date 2020/2/6
   */
-object LineCount {
+object ParallelizeCollection {
   def main(args: Array[String]): Unit = {
+    val arr = 1 to 10000
+
     val conf = new SparkConf()
-      .setAppName("LineCount")
+      .setAppName("ParallelizeCollection")
       .setMaster("local")
 
     val sc = new SparkContext(conf)
 
-    val rdd = sc.textFile("hello.txt")
-    rdd.map((_, 1))
-      .reduceByKey(_ + _)
-      .foreach(count => println(s"${count._1} : ${count._2}"))
+    val rdd = sc.parallelize(arr)
+
+    val sum = rdd.reduce(_ + _)
+
+    println(s"sum : $sum")
   }
 }

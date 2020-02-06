@@ -1,5 +1,3 @@
-package example29
-
 import org.apache.spark.{SparkConf, SparkContext}
 
 /**

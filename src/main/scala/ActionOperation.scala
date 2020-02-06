@@ -1,5 +1,3 @@
-package example29
-
 import org.apache.spark.{SparkConf, SparkContext}
 
 /**
@@ -83,8 +81,14 @@ object ActionOperation {
     */
   def saveAsTextFile(): Unit = {
     val arr = 1 to 100
+
+    val rdd = sc.parallelize(arr)
+    rdd.cache()
     sc.parallelize(arr)
-      .saveAsTextFile("C:\\Users\\13983\\Desktop\\test.txt")
+      // 直接将rdd中的数据，保存在HFDS文件中
+      // 但是要注意，我们这里只能指定文件夹，也就是目录
+      // 那么实际上，会保存为目录中的/double_number.txt/part-00000文件
+      .saveAsTextFile("hdfs://spark1:9000/double_number.txt")
   }
 
   /**
