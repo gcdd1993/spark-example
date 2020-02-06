@@ -1,19 +1,21 @@
+package example29
+
 import org.apache.spark.{SparkConf, SparkContext}
 
 /**
-  * TODO
+  * word count 单词统计
   *
   * @author gaochen
   * @date 2020/2/3
   */
-object Example29 {
+object WordCountLocal {
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf()
-      .setAppName("WordCountLocal")
+      .setAppName("JavaWordCountLocal")
       .setMaster("local")
 
     val sc = new SparkContext(conf)
-    val rdd = sc.textFile("C:\\Users\\13983\\Desktop\\spark.txt")
+    val rdd = sc.textFile("spark.txt")
     rdd.flatMap(_.split(" "))
       .map((_, 1))
       .reduceByKey(_ + _)
