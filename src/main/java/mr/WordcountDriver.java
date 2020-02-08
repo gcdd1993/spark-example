@@ -16,6 +16,8 @@ import java.io.IOException;
  * 需要在此封装我们的mr程序的相关运行参数，指定jar包
  * 最后提交给yarn
  *
+ * 提交运行命令：hadoop jar spark-example-1.0-SNAPSHOT.jar mr.WordcountDriver
+ *
  * @author gaochen
  * @date 2020/2/9
  */
@@ -61,7 +63,7 @@ public class WordcountDriver {
         job.setOutputValueClass(IntWritable.class);
 
         //将job中配置的相关参数，以及job所用的java类所在的jar包，提交给yarn去运行
-        /*job.submit();*/
+        job.submit();
         boolean res = job.waitForCompletion(true);
         System.exit(res ? 0 : 1);
     }
